@@ -40,6 +40,7 @@ public class Main {
     public static void verDirectivo() {
         int mayorNumeroEmpleados = 0;
         int contadorNumeroEmpleados;
+        String nombreDirectivo = "";
         for (Directivo directivo : directivos) {
             contadorNumeroEmpleados = 0;
             for (Empleado empleado : directivo.getEmpleados()) {
@@ -47,19 +48,10 @@ public class Main {
             }
             if (contadorNumeroEmpleados > mayorNumeroEmpleados) {
                 mayorNumeroEmpleados = contadorNumeroEmpleados;
+                nombreDirectivo = directivo.getNombre();
             }
         }
-        int contador;
-        for (Directivo directivo : directivos) {
-            contador = 0;
-            for (Empleado empleado : directivo.getEmpleados()) {
-                contador++;
-            }
-            if (mayorNumeroEmpleados == contador){
-                System.out.println(directivo.mostrar()+ "\nY es el que mas empleados tiene.");
-            }
-        }
-        
+        System.out.println("El directivo con mayor numero de empleados es: " + nombreDirectivo + " y tiene " + mayorNumeroEmpleados + " empleados.");
         
     }
 }
