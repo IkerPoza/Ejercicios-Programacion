@@ -1,3 +1,6 @@
+import Modelo.Estudio;
+import Modelo.Pelicula;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;

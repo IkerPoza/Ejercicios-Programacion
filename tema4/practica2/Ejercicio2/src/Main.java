@@ -1,6 +1,8 @@
+import Modelo.Estudio;
+import Modelo.Pelicula;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main {
     private static Estudio[] estudios;

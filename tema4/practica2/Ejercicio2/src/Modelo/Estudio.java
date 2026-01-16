@@ -1,4 +1,7 @@
+package Modelo;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Estudio {
     private String nombre;
@@ -8,8 +11,9 @@ public class Estudio {
     private LocalDate fechaFundacion;
     private String pais;
     private int telefono;
+    private ArrayList<Pelicula> peliculas = new ArrayList<>();
 
-    public Estudio(String nombre, String ciudad, String direccion, String direccionWeb, LocalDate fechaFundacion, String pais, int telefono) {
+    public Estudio(String nombre, String ciudad, String direccion, String direccionWeb, LocalDate fechaFundacion, String pais, int telefono, ArrayList<Pelicula> peliculas) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
@@ -17,6 +21,7 @@ public class Estudio {
         this.fechaFundacion = fechaFundacion;
         this.pais = pais;
         this.telefono = telefono;
+        this.peliculas = peliculas;
     }
 
     public String getNombre() {
@@ -74,4 +79,8 @@ public class Estudio {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    public ArrayList<Pelicula> getPeliculas() {return peliculas;}
+
+    public void setPeliculas(ArrayList<Pelicula> peliculas) {this.peliculas = peliculas;}
 }
