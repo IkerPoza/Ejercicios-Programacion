@@ -39,15 +39,10 @@ public class Main {
     }
     public static void verDirectivo() {
         int mayorNumeroEmpleados = 0;
-        int contadorNumeroEmpleados;
         String nombreDirectivo = "";
         for (Directivo directivo : directivos) {
-            contadorNumeroEmpleados = 0;
-            for (Empleado empleado : directivo.getEmpleados()) {
-                contadorNumeroEmpleados++;
-            }
-            if (contadorNumeroEmpleados > mayorNumeroEmpleados) {
-                mayorNumeroEmpleados = contadorNumeroEmpleados;
+            if (directivo.getEmpleados().size() > mayorNumeroEmpleados) {
+                mayorNumeroEmpleados = directivo.getEmpleados().size();
                 nombreDirectivo = directivo.getNombre();
             }
         }
