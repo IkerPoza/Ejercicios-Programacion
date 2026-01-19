@@ -1,52 +1,36 @@
-import Modelo.Directivo;
-import Modelo.Empleado;
+import Modelo.Cliente;
+import Modelo.Empresa;
 
 import java.util.ArrayList;
 
 public class Main {
-    public static ArrayList<Directivo> directivos = new ArrayList<>();
+    public static ArrayList<Cliente> clientes;
     public static void main(String[] args) {
-        crearPersonas();
-        verDirectivo();
+        crearClientes();
+        crearEmpresas();
     }
-    public static void crearPersonas() {
-        Empleado empleado1 = new Empleado("Alberto", 30, 15000);
-        Empleado empleado2 = new Empleado("Marta", 30, 15000);
-        Empleado empleado3 = new Empleado("Sandro", 30, 15000);
-        Empleado empleado4 = new Empleado("Saul", 30, 15000);
-        Empleado empleado5 = new Empleado("Lopez", 30, 15000);
-        Empleado empleado6 = new Empleado("Antonio", 30, 15000);
-
-        ArrayList<Empleado> empleados1 = new ArrayList<>();
-        empleados1.add(empleado1);
-        empleados1.add(empleado2);
-        empleados1.add(empleado3);
-
-        ArrayList<Empleado> empleados2 = new ArrayList<>();
-        empleados2.add(empleado4);
-        empleados2.add(empleado5);
-
-        ArrayList<Empleado> empleados3 = new ArrayList<>();
-        empleados3.add(empleado6);
-
-        Directivo directivo1 = new Directivo("Arturo", 40, 20000, "Ciencia",  empleados2);
-        Directivo directivo2 = new Directivo("Javier", 40, 20000, "Informatica",  empleados1);
-        Directivo directivo3 = new Directivo("Xabi", 50, 30000, "Mecanica",  empleados3);
-
-        directivos.add(directivo1);
-        directivos.add(directivo2);
-        directivos.add(directivo3);
+    public static void crearClientes() {
+        clientes = new ArrayList<>();
+        clientes.add(new Cliente("C1", 30, 101));
+        clientes.add(new Cliente("C2", 30, 102));
+        clientes.add(new Cliente("C3", 30, 103));
+        clientes.add(new Cliente("C4", 30, 104));
+        clientes.add(new Cliente("C5", 30, 105));
+        clientes.add(new Cliente("C6", 30, 106));
+        clientes.add(new Cliente("C7", 30, 107));
+        clientes.add(new Cliente("C8", 30, 108));
+        clientes.add(new Cliente("C9", 30, 109));
+        clientes.add(new Cliente("C10", 30, 1010));
     }
-    public static void verDirectivo() {
-        int mayorNumeroEmpleados = 0;
-        String nombreDirectivo = "";
-        for (Directivo directivo : directivos) {
-            if (directivo.getEmpleados().size() > mayorNumeroEmpleados) {
-                mayorNumeroEmpleados = directivo.getEmpleados().size();
-                nombreDirectivo = directivo.getNombre();
-            }
-        }
-        System.out.println("El directivo con mayor numero de empleados es: " + nombreDirectivo + " y tiene " + mayorNumeroEmpleados + " empleados.");
-        
+    public  static void crearEmpresas() {
+        ArrayList<Empresa> empresas = new ArrayList<>();
+        ArrayList<Cliente> clientesEmp1 = new ArrayList<>();
+        clientesEmp1.add(clientes.get(0));
+        clientesEmp1.add(clientes.get(1));
+        clientesEmp1.add(clientes.get(2));
+        clientesEmp1.add(clientes.get(3));
+
+
+        empresas.add(new Empresa("Empresa1", clientesEmp1, ))
     }
 }
