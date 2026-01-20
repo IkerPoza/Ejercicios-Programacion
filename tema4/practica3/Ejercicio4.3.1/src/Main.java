@@ -59,10 +59,12 @@ public class Main {
                     devolverLibro();
                     break;
                 case 3:
-
+                    sc.nextLine();
+                    datos();
                     break;
                 case 4:
-
+                    continuar = false;
+                    System.out.println("Se ha finalizado el programa.");
                     break;
             }
         }while (continuar);
@@ -128,5 +130,17 @@ public class Main {
         }while (error);
 
         alumnos.get(posicionAlumno).devolver(libros.get(posicionLibro));
+    }
+    public static void datos(){
+        System.out.println("Los libros disponibles son:");
+        for (Libro libro : libros) {
+            if (libro.getNumeroEjemplares() > 0) {
+                System.out.println(libro.getTitulo() + " --> " + libro.getNumeroEjemplares());
+            }
+        }
+        System.out.println("\nLos datos de los alumnos son:");
+        for (Alumno alumno : alumnos) {
+            System.out.println(alumno.getNombre()+ " --> "+ alumno.getLibrosAlquilados().size());
+        }
     }
 }
