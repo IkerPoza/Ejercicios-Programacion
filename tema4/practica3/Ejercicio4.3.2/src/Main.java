@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner sc = new Scanner(System.in);
-    public static ArrayList<Mascota> listaMascotas = new ArrayList<Mascota>();
-    public static ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
-    public static ArrayList<Veterinario> listaVeterinarios = new ArrayList<Veterinario>();
+    public static ArrayList<Mascota> listaMascotas = new ArrayList<>();
+    public static ArrayList<Cliente> listaClientes = new ArrayList<>();
+    public static ArrayList<Veterinario> listaVeterinarios = new ArrayList<>();
     public static void main(String[] args) {
         agregarVeterinarios();
         agregarCliente();
@@ -44,7 +44,6 @@ public class Main {
             }while(error);
         }while(continuar);
     }
-
 
     public static void agregarCliente(){
         boolean continuar;
