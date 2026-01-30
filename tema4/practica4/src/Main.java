@@ -63,6 +63,19 @@ public class Main {
         ejercicioonce();
         ejerciciodoce();
         ejerciciotrece();
+        ejerciciocatorce();
+        ejercicioquince();
+        ejerciciodieciseis();
+        ejerciciodiecisiete();
+        ejerciciodieciocho();
+        ejerciciodiecinueve();
+        ejercicioveinte();
+        ejercicio21_1();
+        ejercicio21_2();
+        ejercicio21_3();
+        ejercicio21_4();
+        ejercicio21_5();
+        ejercicio21_6();
     }
     public static void ejercicioUno() {
         List <String> matriculas = coches.stream()
@@ -293,5 +306,104 @@ public class Main {
             System.out.println("Edad: " + edad);
             lista.forEach(c -> System.out.println("  " + c.getMatricula()));
         });
+    }
+
+    public static void ejerciciocatorce(){
+        Map<String, Double> precioMarca = coches.stream()
+                .collect(Collectors.groupingBy(Coche::getMarca,
+                        Collectors.averagingDouble(Coche::getPrecio)));
+
+        System.out.println("Marca: " + precioMarca);
+    }
+
+    public static void ejercicioquince(){
+        String texto = coches.stream()
+                .map(Coche::getMatricula)
+                .reduce("",(coche, coche2) -> coche + " " + coche2);
+
+        System.out.println("Texto: " + texto);
+    }
+
+    public static void ejerciciodieciseis(){
+        System.out.println("Toyota: "+coches.stream()
+                .filter(coche -> coche.getMarca().equalsIgnoreCase("Toyota"))
+                .count());
+    }
+
+    public static void ejerciciodiecisiete(){
+        System.out.println("Marcas: "+coches.stream()
+                .map(Coche::getMarca)
+                .distinct()
+                .sorted()
+                .toList());
+    }
+
+    public static void ejerciciodieciocho(){
+        System.out.println("Coche moderno barato: "+coches.stream()
+                .filter(coche -> coche.getAno()>2015)
+                .min(Comparator.comparingDouble(Coche::getPrecio))
+                .map(Coche::getMatricula)
+                .orElse(""));
+    }
+
+    public static void ejerciciodiecinueve(){
+        boolean matriculasRepetidas = coches.stream()
+                .map(Coche::getMatricula)
+                .distinct()
+                .count() != coches.size();
+
+        System.out.println("Matriculas Repetidas: "+matriculasRepetidas);
+    }
+
+    public static void ejercicioveinte(){
+        System.out.println("Coches mas caros: "+coches.stream()
+                .sorted(Comparator.comparingDouble(Coche::getPrecio).reversed())
+                .limit(3)
+                .map(Coche::getMatricula)
+                .toList());
+    }
+
+    public static void ejercicio21_1(){
+        System.out.println("Coches por Propietarios: "+propietarios.stream()
+                .flatMap(propietario ->  propietario.getCoches().stream())
+                .map(Coche::getMatricula)
+                .toList());
+    }
+
+    public static void ejercicio21_2(){
+        System.out.println("Numero total de coches: "+propietarios.stream()
+                .mapToLong(propietario ->  propietario.getCoches().size())
+                .sum());
+    }
+
+    public static void ejercicio21_3(){
+        System.out.println("Coches por Propietarios: "+propietarios.stream()
+                .flatMap(propietario ->  propietario.getCoches().stream())
+                .map(Coche::getMatricula)
+                .toList());
+    }
+
+    public static void ejercicio21_4(){
+        boolean BMW = propietarios.stream()
+                .flatMap(propietario -> propietario.getCoches().stream())
+                .anyMatch(coche -> coche.getMarca().equalsIgnoreCase("BMW"));
+
+        System.out.println("Existe algun BMW: "+BMW);
+    }
+
+    public static void ejercicio21_5(){
+        System.out.println("Coches posteriores a 2018: "+propietarios.stream()
+                .flatMap(propietario -> propietario.getCoches().stream())
+                .filter(coche -> coche.getAno()>2018)
+                .map(Coche::getMatricula)
+                .toList());
+    }
+
+    public static void ejercicio21_6(){
+        System.out.println("Precio medio todos los coches: "+propietarios.stream()
+                .flatMap(propietario -> propietario.getCoches().stream())
+                .mapToDouble(Coche::getPrecio)
+                .average()
+                .orElse(0.0));
     }
 }
