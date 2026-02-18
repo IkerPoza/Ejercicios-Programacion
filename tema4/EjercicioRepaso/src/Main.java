@@ -59,11 +59,13 @@ public class Main {
 
     public static void realizarPedido() {
         ArrayList<Producto> productosPedido = new ArrayList<>();
-        Usuario usuario = (Usuario) usuarios.stream().filter(usuario1 -> usuario1.getNombre().equalsIgnoreCase(validarDato("Nombre del Usuario", "Introduce el nombre del usuario que va a realizar la compra:","^[A-Za-z]+$")));
+        Usuario usuario = usuarios.stream()
+                .filter(usuario1 -> usuario1.getNombre().equalsIgnoreCase(validarDato("Nombre", "Introduce el nombre de usuario:", "^[A-Za-z]+$")))
+                .findFirst().orElse(null);
         boolean repetir = true;
         do {
             String nombreProducto = validarDato("Nombre producto", "Introduce el nombre del producto:", "^[A-Za-z]+$");
-            Producto productoPedido = productos.stream().filter(producto -> producto.getNombre().equals(nombreProducto)).findFirst().orElse(null);
+            Producto productoPedido = productos.stream().filter(producto -> producto.getNombre().equalsIgnoreCase(nombreProducto)).findFirst().orElse(null);
             if (productoPedido != null && productoPedido.getStock()>0) {
                 System.out.println("Stock de "+productoPedido.getNombre()+": "+productoPedido.getStock());
                 int cantidad = Integer.parseInt(validarDato("Cantidad", "Introduce la cantidad que quieres del producto:", "^[0-9]+$"));
