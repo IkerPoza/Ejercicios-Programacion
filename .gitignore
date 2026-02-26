@@ -1,8 +1,0 @@
-# Archivos de IntelliJ / Android Studio
-*.iml
-.idea/
-out/
-
-# Ignorar otros .gitignore en subcarpetas, excepto el de la raíz
-**/.gitignore
-!.gitignore
