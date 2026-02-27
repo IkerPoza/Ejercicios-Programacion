@@ -1,9 +1,7 @@
-import Vista.menuControlador;
-
-import java.sql.SQLException;
+import Vista.menuPrincipal;
 
 public class Main {
-    public static void main(String[] args) {
-        menuControlador.mostrarMenu();
+    public static void main(String[] args) throws Exception {
+        menuPrincipal.mostrarMenu();
     }
 }

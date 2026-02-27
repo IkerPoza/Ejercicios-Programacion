@@ -7,15 +7,15 @@ import Utilidades.validarDato;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class menuControlador {
-    public static Scanner sc = new Scanner(System.in);
+public class menuTitular {
+        public static Scanner sc = new Scanner(System.in);
     public static void mostrarMenu() {
         boolean continuar = true;
         do {
             System.out.print("""
                 
                 ╔══════════════════════════════════════╗
-                ║        --- Menu Opciones ---         ║
+                ║        --- Menu Titular ---          ║
                 ║                                      ║
                 ║       a) Crear titular               ║
                 ║       b) Borrar titular              ║
