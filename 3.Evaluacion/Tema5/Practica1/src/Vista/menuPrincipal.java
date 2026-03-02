@@ -14,7 +14,8 @@ public class menuPrincipal {
                 ║                                      ║
                 ║       a) Menu Titular                ║
                 ║       b) Menu Cuenta                 ║
-                ║       c) Salir                       ║
+                ║       c) Menu Asociar                ║
+                ║       d) Salir                       ║
                 ╚══════════════════════════════════════╝
                 Que opción desea realizar?
                 """);
@@ -22,7 +23,8 @@ public class menuPrincipal {
             switch (opcion) {
                 case "a" -> menuTitular.mostrarMenu();
                 case "b" -> menuCuenta.mostrarMenu();
-                case "c" -> continuar = false;
+                case "c" -> menuAsociar.mostrarMenu();
+                case "d" -> continuar = false;
                 default -> System.out.println("Opción no válida");
             }
         }while (continuar);
