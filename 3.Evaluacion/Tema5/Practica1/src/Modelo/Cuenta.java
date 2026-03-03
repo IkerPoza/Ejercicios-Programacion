@@ -16,6 +16,10 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
+    public Cuenta(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

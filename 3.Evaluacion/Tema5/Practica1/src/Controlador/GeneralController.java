@@ -7,6 +7,7 @@ import Modelo.Cuenta;
 import Modelo.Titular;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class GeneralController {
@@ -55,14 +56,30 @@ public class GeneralController {
         }
     }
 
-    public static Map<Titular,Cuenta> mostrarAsociaciones() {
-        return  CuentaTitularDAO.mostrarAsociaciones();
+    public static Map<Titular,Cuenta> mostrarAsociaciones() throws Exception {
+        Map<Titular,Cuenta> asociaciones = new HashMap<>();
+        asociaciones = CuentaTitularDAO.mostrarAsociaciones();
+        for (Map.Entry<Titular,Cuenta> entry : asociaciones.entrySet()) {
+            Titular titular = TitularDAO.verTitularPorId(entry.getKey().getId());
+            entry.getKey().setDni(titular.getDni());
+            entry.getKey().setNombre(titular.getNombre());
+            Cuenta cuenta = CuentaDAO.verCuentaPorId(String.valueOf(entry.getValue().getId()));
+            entry.getValue().setIban(cuenta.getIban());
+            entry.getValue().setSaldo(cuenta.getSaldo());
+        }
+        return asociaciones;
     }
 
     public static ArrayList<Cuenta> mostrarCuentasPorTitular(String dni) throws Exception {
         Titular titular = TitularDAO.verTitularPorDni(dni);
         if (titular != null) {
-            return CuentaTitularDAO.mostrarCuentasPorTitular(titular);
+            ArrayList<Cuenta> cuentas = CuentaTitularDAO.mostrarCuentasPorTitular(titular);
+            for (Cuenta cuenta : cuentas) {
+                Cuenta cuentaCompleta = CuentaDAO.verCuentaPorId(String.valueOf(cuenta.getId()));
+                cuenta.setIban(cuentaCompleta.getIban());
+                cuenta.setSaldo(cuentaCompleta.getSaldo());
+            }
+            return cuentas;
         }
         return null;
     }
@@ -70,7 +87,13 @@ public class GeneralController {
     public static ArrayList<Titular> mostrarTitularesPorCuenta(String iban) throws Exception {
         Cuenta cuenta = CuentaDAO.verCuentaPorIban(iban);
         if (cuenta != null) {
-            return CuentaTitularDAO.mostrarTitularesPorCuenta(cuenta);
+            ArrayList<Titular> titulares = CuentaTitularDAO.mostrarTitularesPorCuenta(cuenta);
+            for (Titular titular : titulares) {
+                Titular titularCompleto = TitularDAO.verTitularPorId(titular.getId());
+                titular.setDni(titularCompleto.getDni());
+                titular.setNombre(titularCompleto.getNombre());
+            }
+            return titulares;
         }
         return null;
     }

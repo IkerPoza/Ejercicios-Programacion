@@ -76,17 +76,12 @@ public class CuentaTitularDAO {
         try {
             asociaciones = new HashMap<>();
             Connection con = ConexionDB.conectar();
-            String sql = "SELECT id_titular, t.nombre, t.dni, id_cuenta, c.iban, c.saldo FROM cuentas_titulares ct JOIN titulares t ON ct.id_titular = t.id JOIN cuentas c ON ct.id_cuenta = c.id";
+            String sql = "SELECT id_titular, id_cuenta FROM cuentas_titulares";
             PreparedStatement sentencia = con.prepareStatement(sql);
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
-                asociaciones.put(new Titular(resultado.getInt("id_titular"),
-                                resultado.getString("nombre"),
-                                resultado.getString("dni")),
-                        new Cuenta(resultado.getInt("id_cuenta"),
-                                resultado.getString("iban"),
-                                resultado.getDouble("saldo")
-                        )
+                asociaciones.put(new Titular(resultado.getInt("id_titular")),
+                        new Cuenta(resultado.getInt("id_cuenta"))
                 );
             }
             ConexionDB.desconectar(con);
@@ -101,14 +96,12 @@ public class CuentaTitularDAO {
         try {
             cuentas = new ArrayList<>();
             Connection con = ConexionDB.conectar();
-            String sql = "SELECT c.id, c.iban, c.saldo FROM cuentas_titulares ct JOIN cuentas c ON ct.id_cuenta = c.id WHERE ct.id_titular = ?";
+            String sql = "SELECT id_cuenta FROM cuentas_titulares WHERE id_titular = ?";
             PreparedStatement sentencia = con.prepareStatement(sql);
             sentencia.setInt(1, titular.getId());
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
-                cuentas.add(new Cuenta(resultado.getInt("id"),
-                        resultado.getString("iban"),
-                        resultado.getDouble("saldo")
+                cuentas.add(new Cuenta(resultado.getInt("id_cuenta")
                 ));
             }
             ConexionDB.desconectar(con);
@@ -123,14 +116,12 @@ public class CuentaTitularDAO {
         try {
             titulares = new ArrayList<>();
             Connection con = ConexionDB.conectar();
-            String sql = "SELECT t.id, t.nombre, t.dni FROM cuentas_titulares ct JOIN titulares t ON ct.id_titular = t.id WHERE ct.id_cuenta = ?";
+            String sql = "SELECT id_titular FROM cuentas_titulares  WHERE id_cuenta = ?";
             PreparedStatement sentencia = con.prepareStatement(sql);
             sentencia.setInt(1, cuenta.getId());
             ResultSet resultado = sentencia.executeQuery();
             while (resultado.next()) {
-                titulares.add(new Titular(resultado.getInt("id"),
-                        resultado.getString("nombre"),
-                        resultado.getString("dni")
+                titulares.add(new Titular(resultado.getInt("id_titular")
                 ));
             }
             ConexionDB.desconectar(con);

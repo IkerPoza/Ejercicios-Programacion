@@ -17,6 +17,7 @@ public class Titular {
     }
 
     public Titular(int id) {
+        this.id = id;
     }
 
     public int getId() {
