@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,5 +94,49 @@ public class CuentaTitularDAO {
             System.out.println("Error al mostrar asociación: " + e.getMessage());
         }
         return asociaciones;
+    }
+
+    public static ArrayList<Cuenta> mostrarCuentasPorTitular(Titular titular) {
+        ArrayList<Cuenta> cuentas = null;
+        try {
+            cuentas = new ArrayList<>();
+            Connection con = ConexionDB.conectar();
+            String sql = "SELECT c.id, c.iban, c.saldo FROM cuentas_titulares ct JOIN cuentas c ON ct.id_cuenta = c.id WHERE ct.id_titular = ?";
+            PreparedStatement sentencia = con.prepareStatement(sql);
+            sentencia.setInt(1, titular.getId());
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                cuentas.add(new Cuenta(resultado.getInt("id"),
+                        resultado.getString("iban"),
+                        resultado.getDouble("saldo")
+                ));
+            }
+            ConexionDB.desconectar(con);
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar cuentas por titular: " + e.getMessage());
+        }
+        return cuentas;
+    }
+
+    public static ArrayList<Titular> mostrarTitularesPorCuenta(Cuenta cuenta) {
+        ArrayList<Titular> titulares = null;
+        try {
+            titulares = new ArrayList<>();
+            Connection con = ConexionDB.conectar();
+            String sql = "SELECT t.id, t.nombre, t.dni FROM cuentas_titulares ct JOIN titulares t ON ct.id_titular = t.id WHERE ct.id_cuenta = ?";
+            PreparedStatement sentencia = con.prepareStatement(sql);
+            sentencia.setInt(1, cuenta.getId());
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                titulares.add(new Titular(resultado.getInt("id"),
+                        resultado.getString("nombre"),
+                        resultado.getString("dni")
+                ));
+            }
+            ConexionDB.desconectar(con);
+        } catch (SQLException e) {
+            System.out.println("Error al mostrar titulares por cuenta: " + e.getMessage());
+        }
+        return titulares;
     }
 }

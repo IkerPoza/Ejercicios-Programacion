@@ -6,6 +6,7 @@ import DAO.TitularDAO;
 import Modelo.Cuenta;
 import Modelo.Titular;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class GeneralController {
@@ -56,5 +57,21 @@ public class GeneralController {
 
     public static Map<Titular,Cuenta> mostrarAsociaciones() {
         return  CuentaTitularDAO.mostrarAsociaciones();
+    }
+
+    public static ArrayList<Cuenta> mostrarCuentasPorTitular(String dni) throws Exception {
+        Titular titular = TitularDAO.verTitularPorDni(dni);
+        if (titular != null) {
+            return CuentaTitularDAO.mostrarCuentasPorTitular(titular);
+        }
+        return null;
+    }
+
+    public static ArrayList<Titular> mostrarTitularesPorCuenta(String iban) throws Exception {
+        Cuenta cuenta = CuentaDAO.verCuentaPorIban(iban);
+        if (cuenta != null) {
+            return CuentaTitularDAO.mostrarTitularesPorCuenta(cuenta);
+        }
+        return null;
     }
 }

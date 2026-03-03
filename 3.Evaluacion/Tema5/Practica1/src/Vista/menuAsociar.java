@@ -5,6 +5,7 @@ import Modelo.Cuenta;
 import Modelo.Titular;
 import Utilidades.validarDato;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,11 +19,13 @@ public class menuAsociar {
                 ╔══════════════════════════════════════╗
                 ║        --- Menu Asociar ---          ║
                 ║                                      ║
-                ║       a) Crear Asociacion            ║
-                ║       b) Modificar Asociacion        ║
-                ║       c) Borrar Asociacion           ║
-                ║       d) Mostrar Asociaciones        ║
-                ║       e) Salir                       ║
+                ║     a) Crear Asociacion              ║
+                ║     b) Modificar Asociacion          ║
+                ║     c) Borrar Asociacion             ║
+                ║     d) Mostrar Asociaciones          ║
+                ║     e) Mostrar cuentas de titular    ║
+                ║     f) Mostrar titulares de cuenta   ║
+                ║     g) Salir                         ║
                 ╚══════════════════════════════════════╝
                 Que opción desea realizar?
                 """);
@@ -32,7 +35,9 @@ public class menuAsociar {
                 case "b" -> modificarAsociacion();
                 case "c" -> borrarAsociacion();
                 case "d" -> mostrarAsociaciones();
-                case "e" -> continuar = false;
+                case "e" -> mostrarCuentasPorTitular();
+                case "f" -> mostrarTitularesPorCuenta();
+                case "g" -> continuar = false;
                 default -> System.out.println("Opción no válida");
             }
         }while (continuar);
@@ -88,6 +93,38 @@ public class menuAsociar {
             }
         }catch (Exception e){
             System.out.println("No se ha encontrado la asociación con los datos proporcionados.");
+        }
+    }
+
+    public static void mostrarCuentasPorTitular (){
+        try{
+            ArrayList<Cuenta> cuentas = GeneralController.mostrarCuentasPorTitular(validarDato.validarDato(sc, "dni", "Ingrese el DNI del titular: ", "^[0-9]{8}[A-Z]$"));
+            if (cuentas == null || cuentas.isEmpty()) {
+                System.out.println("El titular no tiene cuentas asociadas o no existe el titular.");
+            }else {
+                System.out.println("--- Cuentas asociadas al titular ---");
+                for (Cuenta cuenta : cuentas) {
+                    System.out.println("- " + cuenta.getIban() + " (Saldo: " + cuenta.getSaldo() + ")");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("No se ha encontrado el titular con los datos proporcionados.");
+        }
+    }
+
+    public static void mostrarTitularesPorCuenta(){
+        try {
+            ArrayList<Titular> titulares = GeneralController.mostrarTitularesPorCuenta(validarDato.validarDato(sc, "iban", "Ingrese el IBAN de la cuenta: ", "^[A-Z]{2}[0-9]{22}$"));
+            if (titulares == null || titulares.isEmpty()) {
+                System.out.println("La cuenta no tiene titulares asociados o no existe la cuenta.");
+            } else {
+                System.out.println("--- Titulares asociados a la cuenta ---");
+                for (Titular titular : titulares) {
+                    System.out.println("- " + titular.getNombre() + " (DNI: " + titular.getDni() + ")");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("No se ha encontrado la cuenta con los datos proporcionados.");
         }
     }
 }
