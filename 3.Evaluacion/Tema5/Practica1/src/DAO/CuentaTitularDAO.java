@@ -79,7 +79,7 @@ public class CuentaTitularDAO {
             String sql = "SELECT id_titular, t.nombre, t.dni, id_cuenta, c.iban, c.saldo FROM cuentas_titulares ct JOIN titulares t ON ct.id_titular = t.id JOIN cuentas c ON ct.id_cuenta = c.id";
             PreparedStatement sentencia = con.prepareStatement(sql);
             ResultSet resultado = sentencia.executeQuery();
-            if (resultado.next()) {
+            while (resultado.next()) {
                 asociaciones.put(new Titular(resultado.getInt("id_titular"),
                                 resultado.getString("nombre"),
                                 resultado.getString("dni")),
