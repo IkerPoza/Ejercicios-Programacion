@@ -118,12 +118,13 @@ public class pasajeroDAO {
         return pasajero;
     }
 
-    public static ArrayList<Pasajero> buscarPasajeros() {
+    public static ArrayList<Pasajero> buscarPasajerosPorVuelo(String codVuelo) {
         ArrayList<Pasajero> pasajeros = new ArrayList<>();
         try{
             Connection con = conexionDB.conectar();
-            String sql = "SELECT * FROM pasajeros";
+            String sql = "SELECT * FROM pasajeros WHERE cod_vuelo = ?";
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, codVuelo);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Pasajero pasajero = new Pasajero(

@@ -35,7 +35,7 @@ public class pasajeroController {
         return pasajeroDAO.buscarPasajero(dni);
     }
 
-    public static ArrayList<Pasajero> buscarPasajeros() {
-        return pasajeroDAO.buscarPasajeros();
+    public static ArrayList<Pasajero> buscarPasajerosPorVuelo(String codVuelo) {
+        return pasajeroDAO.buscarPasajerosPorVuelo(codVuelo);
     }
 }

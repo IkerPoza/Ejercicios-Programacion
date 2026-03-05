@@ -106,7 +106,7 @@ public class menuConsultas {
     }
 
     public static void listaPasajerosPorVuelo(){
-        ArrayList<Pasajero> pasajeros = jefeController.pasajerosPorVuelo(
+        ArrayList<Pasajero> pasajeros = pasajeroController.buscarPasajerosPorVuelo(
                 validarDato.validarDato(sc,"Codigo Vuelo","Introduce el codigo del vuelo a consultar sus pasajeros: ", "^[A-Z]{3}[0-9]-[0-9]{5}$"));
         if (!pasajeros.isEmpty()) {
             System.out.println("Pasajeros encontrados:");
