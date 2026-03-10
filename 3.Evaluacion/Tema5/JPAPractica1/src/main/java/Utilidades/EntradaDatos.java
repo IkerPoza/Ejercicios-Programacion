@@ -4,18 +4,15 @@ import java.util.Scanner;
 
 public class EntradaDatos {
 
-    // Forma parte de la vista, pero es tan común que la pongo aquí para no repetir código.
     public static int leerEntero(Scanner sc, String mensaje) {
         int num = 0;
         boolean error = true;
         try {
-            num = 0;
             do
             {
                 System.out.print(mensaje);
                 try {
                     num = Integer.parseInt(sc.nextLine());
-                    // También se puede con nextInt pero así me ahorro el limpiar el buffer después.
                     error = false;
                 } catch (NumberFormatException e) {
                     System.out.println("Error: introduce un número entero válido.");
