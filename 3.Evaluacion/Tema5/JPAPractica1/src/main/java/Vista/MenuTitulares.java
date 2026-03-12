@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class MenuTitulares {
     public static Scanner sc = new Scanner(System.in);
 
-    public void mostrarMenu() {
+    public static void mostrarMenu() {
         int opcion;
         do
         {

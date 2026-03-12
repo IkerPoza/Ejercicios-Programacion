@@ -1,50 +1,38 @@
 package DAO;
 
-import Modelo.Titular;
+import Modelo.Cuenta;
 import Utilidades.DBConnection;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.ArrayList;
 
-public class TitularDAO {
-    private static final EntityManagerFactory emf = DBConnection.getEntityManagerFactory();
-    public static void insertar(Titular titular) {
+public class CuentaDAO {
+    private static EntityManagerFactory emf = DBConnection.getEntityManagerFactory();
+
+    public static void insertar(Cuenta cuenta) {
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
-            em.persist(titular);
+            em.persist(cuenta);
             em.getTransaction().commit();
             em.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
         }
     }
 
-    public static void modificarTitular(Titular titular) {
+    public static void borrarCuenta(String iban) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(titular);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-        }
-    }
-    public static void borrarTitular(String dni) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            Titular t = em.createQuery("SELECT t FROM Titular t WHERE t.dni = :dni", Titular.class)
-                    .setParameter("dni", dni)
+            Cuenta c = em.createQuery("SELECT c FROM Cuenta c WHERE c.iban = :iban", Cuenta.class)
+                    .setParameter("iban", iban)
                     .getSingleResult();
-            if (t != null) {
-                em.remove(t);
+            if (c != null) {
+                em.remove(c);
             }
             em.getTransaction().commit();
             em.close();
@@ -54,61 +42,78 @@ public class TitularDAO {
             }
         }
     }
-    public static ArrayList<Titular> listarTitulares() {
+
+    public static void modificarCuenta(Cuenta cuenta) {
         EntityManager em = emf.createEntityManager();
         try {
-            ArrayList<Titular> titulares = new ArrayList<>(em.createQuery("SELECT t FROM Titular t", Titular.class).getResultList());
+            em.getTransaction().begin();
+            em.merge(cuenta);
+            em.getTransaction().commit();
             em.close();
-            return titulares;
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        }
+    }
+
+    public static ArrayList<Cuenta> mostrarCuentas() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            ArrayList<Cuenta> cuentas = new ArrayList<>(em.createQuery("SELECT c FROM Cuenta c", Cuenta.class).getResultList());
+            em.close();
+            return cuentas;
+        }catch(Exception e){
+            if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
             }
             return new ArrayList<>();
         }
     }
-    public static ArrayList<Titular> listarTitularesPorNombre(String nombre) {
+
+    public static Cuenta buscarCuentaPorId(int id) {
         EntityManager em = emf.createEntityManager();
         try {
-            ArrayList<Titular> titulares = new ArrayList<>(em.createQuery("SELECT t FROM Titular t WHERE t.nombre LIKE :nombre", Titular.class)
-                    .setParameter("nombre", "%" + nombre + "%")
+            Cuenta cuenta = em.find(Cuenta.class, id);
+            em.close();
+            return cuenta;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return null;
+        }
+    }
+
+    public static Cuenta buscarCuentaPorIban(String iban) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Cuenta cuenta = em.createQuery("SELECT c FROM Cuenta c WHERE c.iban = :iban", Cuenta.class)
+                    .setParameter("iban", iban)
+                    .getSingleResult();
+            em.close();
+            return cuenta;
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return null;
+        }
+    }
+
+    public static ArrayList<Cuenta> listarCuentasPorSaldo(int saldoMinimo) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            ArrayList<Cuenta> cuentas = new ArrayList<>(em.createQuery("SELECT c FROM Cuenta c WHERE c.saldo >= :saldoMinimo", Cuenta.class)
+                    .setParameter("saldoMinimo", saldoMinimo)
                     .getResultList());
             em.close();
-            return titulares;
+            return cuentas;
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             return new ArrayList<>();
-        }
-    }
-    public static Titular buscarTitularPorId(int id) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Titular titular = em.find(Titular.class, id);
-            em.close();
-            return titular;
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            return null;
-        }
-    }
-    public static Titular buscarTitularPorDni(String dni) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Titular titular = em.createQuery("SELECT t FROM Titular t WHERE t.dni = :dni", Titular.class)
-                    .setParameter("dni", dni)
-                    .getSingleResult();
-            em.close();
-            return titular;
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            return null;
         }
     }
 }
-
