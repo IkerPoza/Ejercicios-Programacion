@@ -16,6 +16,9 @@ public class Titular {
     @Column(name = "dni", nullable = false, length = 9)
     private String dni;
 
+    @OneToMany(mappedBy = "idTitular", cascade = CascadeType.ALL)
+    private java.util.List<Cuenta> cuentas;
+
     public Titular() {
 
     }
