@@ -9,7 +9,7 @@ public class ConexionDB {
         Connection con = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/prjavfx";
+            String url = "jdbc:mysql://localhost:3306/prjavafx";
             con = DriverManager.getConnection(url, "root", "usbw");
         }catch( ClassNotFoundException e){
             System.out.println("Error al cargar el driver de la base de datos: " + e.getMessage());

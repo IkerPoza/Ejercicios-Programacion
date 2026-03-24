@@ -10,4 +10,8 @@ public class personaControlador {
         Persona persona = new Persona(dni, nombre, apellido, fecha_nac, telefono);
         personaDAO.insertar(persona);
     }
+
+    public static void eliminar(String dni){
+        personaDAO.eliminar(dni);
+    }
 }

@@ -14,6 +14,9 @@ import java.io.IOException;
 public class menuInicialControllerVista {
 
     @FXML
+    private Button bActualizar;
+
+    @FXML
     private Button bConsultar;
 
     @FXML
@@ -29,8 +32,21 @@ public class menuInicialControllerVista {
     }
 
     @FXML
-    void onEliminarClick(ActionEvent event) {
+    void onEliminarClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("formularioEliminar.fxml"));
+        Parent root = fxmlLoader.load();
 
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Eliminar");
+        stage.setScene(scene);
+
+        formularioEliminarControllerVista controller = fxmlLoader.getController();
+
+        controller.init(stage,this);
+
+        stage.show();
+        this.stage.close();
     }
 
     @FXML
@@ -41,6 +57,24 @@ public class menuInicialControllerVista {
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setTitle("Insertar");
+        stage.setScene(scene);
+
+        formularioInsertarControllerVista controller = fxmlLoader.getController();
+
+        controller.init(stage,this);
+
+        stage.show();
+        this.stage.close();
+    }
+
+    @FXML
+    void onActualizarClick(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("formularioActualizar.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Actualizar");
         stage.setScene(scene);
 
         formularioInsertarControllerVista controller = fxmlLoader.getController();

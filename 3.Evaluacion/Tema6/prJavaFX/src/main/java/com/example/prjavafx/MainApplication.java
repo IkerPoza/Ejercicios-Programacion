@@ -13,9 +13,8 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("menuInicial.fxml"));
-        Parent root = fxmlLoader.load(); // IMPORTANTE separar esto
+        Parent root = fxmlLoader.load();
 
-        // Obtener el controlador
         menuInicialControllerVista controller = fxmlLoader.getController();
         controller.setStage(stage);
         Scene scene = new Scene(root);

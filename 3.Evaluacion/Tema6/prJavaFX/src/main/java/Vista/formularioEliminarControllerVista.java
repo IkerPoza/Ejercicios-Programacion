@@ -6,55 +6,36 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-
-public class formularioInsertarControllerVista {
+public class formularioEliminarControllerVista {
 
     @FXML
-    private Button bAñadir;
+    private Button bEliminar;
 
     @FXML
     private Button bVolver;
 
     @FXML
-    private TextField tApellido;
-
-    @FXML
     private TextField tDni;
-
-    @FXML
-    private DatePicker dpFechaNac;
-
-    @FXML
-    private TextField tNombre;
-
-    @FXML
-    private TextField tTelefono;
 
     private menuInicialControllerVista controller;
     private Stage stage;
 
     @FXML
-    void onAñadirClick(ActionEvent event) {
+    void onEliminarClick(ActionEvent event) {
         try {
-            if (tDni.getText().isEmpty() || tNombre.getText().isEmpty() || tApellido.getText().isEmpty() || dpFechaNac.getValue() == null || tTelefono.getText().isEmpty()) {
+            if (tDni.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Campos incompletos");
+                alert.setTitle("Campo incompleto");
                 alert.setHeaderText(null);
                 alert.setContentText("Por favor, rellena todos los campos.");
                 alert.showAndWait();
             }else {
                 String dni = ValidarDato.validarDato(tDni.getText(), "^[0-9]{8}[A-Z]$");
-                String nombre = ValidarDato.validarDato(tNombre.getText(), "^[A-Z][a-z]+$");
-                String apellido = ValidarDato.validarDato(tApellido.getText(), "^[A-Z][a-z]+$");
-                LocalDate fechaNac = ValidarDato.validarDate(dpFechaNac.getValue());
-                int telefono = Integer.parseInt(ValidarDato.validarDato(tTelefono.getText(), "^[0-9]{9}$"));
-                personaControlador.insertar(dni, nombre, apellido, fechaNac, telefono);
-                limpiarCeldas();
+                personaControlador.eliminar(dni);
+                tDni.clear();
             }
 
         }catch (Exception ex){
@@ -64,7 +45,6 @@ public class formularioInsertarControllerVista {
             alert.setContentText("Por favor, completa los campos correctamente.");
             alert.showAndWait();
         }
-
     }
 
     @FXML
@@ -78,11 +58,4 @@ public class formularioInsertarControllerVista {
         this.stage = stage;
     }
 
-    public void limpiarCeldas(){
-        tDni.clear();
-        tNombre.clear();
-        tApellido.clear();
-        dpFechaNac.setValue(null);
-        tTelefono.clear();
-    }
 }

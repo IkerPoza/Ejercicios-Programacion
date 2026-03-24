@@ -7,68 +7,70 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.formularioInsertarControllerVista">
-   <children>
-      <Label layoutX="155.0" layoutY="14.0" text="INSERTAR PERSONA">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label layoutX="106.0" layoutY="67.0" text="DNI:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tDni" layoutX="326.0" layoutY="65.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="106.0" layoutY="117.0" text="NOMBRE:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tNombre" layoutX="326.0" layoutY="115.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="103.0" layoutY="177.0" text="APELLIDO:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tApellido" layoutX="326.0" layoutY="175.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="102.0" layoutY="237.0" text="FECHA NACIMIENTO:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="100.0" layoutY="297.0" text="TELEFONO:">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="tTelefono" layoutX="326.0" layoutY="295.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </TextField>
-      <Button fx:id="bAñadir" layoutX="155.0" layoutY="341.0" mnemonicParsing="false" onAction="#onAñadirClick" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #0993dd;" text="AÑADIR">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="bVolver" layoutX="355.0" layoutY="341.0" mnemonicParsing="false" onAction="#onVolverClick" prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: red;" text="VOLVER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <DatePicker fx:id="dpFechaNac" layoutX="325.0" layoutY="235.0" prefHeight="30.0" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="Vista.formularioInsertarControllerVista">
+   <Label layoutX="155.0" layoutY="14.0" text="INSERTAR PERSONA">
+      <font>
+         <Font name="System Bold" size="30.0"/>
+      </font>
+   </Label>
+   <Label layoutX="106.0" layoutY="67.0" text="DNI:">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="tDni" layoutX="326.0" layoutY="65.0">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="106.0" layoutY="117.0" text="NOMBRE:">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="tNombre" layoutX="326.0" layoutY="115.0">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="103.0" layoutY="177.0" text="APELLIDO:">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="tApellido" layoutX="326.0" layoutY="175.0">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Label layoutX="102.0" layoutY="237.0" text="FECHA NACIMIENTO:">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <DatePicker fx:id="dpFechaNac" layoutX="325.0" layoutY="235.0" prefHeight="30.0"/>
+   <Label layoutX="100.0" layoutY="297.0" text="TELEFONO:">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Label>
+   <TextField fx:id="tTelefono" layoutX="326.0" layoutY="295.0">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </TextField>
+   <Button fx:id="bAñadir" layoutX="155.0" layoutY="341.0" mnemonicParsing="false" onAction="#onAñadirClick"
+           prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: #0993dd;" text="AÑADIR">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
+   <Button fx:id="bVolver" layoutX="355.0" layoutY="341.0" mnemonicParsing="false" onAction="#onVolverClick"
+           prefHeight="45.0" prefWidth="90.0" style="-fx-background-color: red;" text="VOLVER">
+      <font>
+         <Font size="18.0"/>
+      </font>
+   </Button>
 </Pane>
